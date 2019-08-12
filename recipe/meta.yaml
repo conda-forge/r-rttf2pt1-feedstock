@@ -14,15 +14,14 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 1
-  skip: True  # [win]
+  number: 2
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
     - {{posix}}filesystem        # [win]
     - {{posix}}make
@@ -50,6 +49,7 @@ about:
 extra:
   recipe-maintainers:
     - conda-forge/r
+    - philip-khor
 
 # Package: Rttf2pt1
 # Title: 'ttf2pt1' Program
