@@ -13,23 +13,26 @@ source:
 
 build:
   number: 2
-  # Checking windows to see if it passes. Uncomment the line if it fails.
-  # skip: true  # [win]
   rpaths:
     - lib/R/lib/
     - lib/
+  missing_dso_whitelist:
+    - '*/R.dll'        # [win]
+    - '*/Rblas.dll'    # [win]
+    - '*/Rlapack.dll'  # [win]
 
 requirements:
   build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
     - {{ compiler('c') }}        # [not win]
     - {{ stdlib("c") }}          # [not win]
-    - {{ compiler('m2w64_c') }}        # [win]
-    - {{ stdlib("m2w64_c") }}          # [win]
-    - {{ posix }}filesystem        # [win]
+    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ stdlib("m2w64_c") }}    # [win]
+    - {{ posix }}filesystem      # [win]
     - {{ posix }}make
-    - {{ posix }}sed               # [win]
-    - {{ posix }}coreutils         # [win]
-    - {{ posix }}zip               # [win]
+    - {{ posix }}sed             # [win]
+    - {{ posix }}coreutils       # [win]
+    - {{ posix }}zip             # [win]
   host:
     - r-base
   run:
@@ -51,20 +54,3 @@ about:
 extra:
   recipe-maintainers:
     - conda-forge/r
-
-# Package: Rttf2pt1
-# Title: 'ttf2pt1' Program
-# Version: 1.3.7
-# Author: Winston Chang, Andrew Weeks, Frank M. Siegert, Mark Heath, Thomas Henlick, Sergey Babkin, Turgut Uyar, Rihardas Hepas, Szalay Tamas, Johan Vromans, Petr Titera, Lei Wang, Chen Xiangyang, Zvezdan Petkovic, Rigel, I. Lee Hetherington
-# Maintainer: Winston Chang <winston@stdout.org>
-# Description: Contains the program 'ttf2pt1', for use with the 'extrafont' package. This product includes software developed by the 'TTF2PT1' Project and its contributors.
-# Depends: R (>= 2.15)
-# License: file LICENSE
-# URL: https://github.com/wch/Rttf2pt1
-# Encoding: UTF-8
-# RoxygenNote: 6.0.1.9000
-# NeedsCompilation: yes
-# Packaged: 2018-06-29 19:58:53 UTC; winston
-# License_is_FOSS: yes
-# Repository: CRAN
-# Date/Publication: 2018-06-29 21:23:28 UTC
